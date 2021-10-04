@@ -4,15 +4,28 @@ const add = document.getElementById("add");
 const minus = document.getElementById("minus");
 const number = document.querySelector("span");
 
+number.innerText = 0;
+
+const ADD = "ADD";
+const MINUS = "MINUS";
+
 //reducer가 return하는 것은 app의 state가 됨
 const countModifier = (count = 0, action) => {
-  console.log(count, action);
-  if (action.type === "ADD") {
-    return count + 1;
-  } else if (action.type === "MINUS") {
-    return count - 1;
-  } else {
-    return count;
+  // console.log(count, action);
+  // if (action.type === "ADD") {
+  //   return count + 1;
+  // } else if (action.type === "MINUS") {
+  //   return count - 1;
+  // } else {
+  //   return count;
+  // }
+  switch (action.type) {
+    case ADD:
+      return count + 1;
+    case MINUS:
+      return count - 1;
+    default:
+      return count;
   }
 };
 
@@ -27,8 +40,8 @@ countStore.subscribe(onChange);
 
 //reducer에게 action을 보낼 땐 dispatch를 사용
 const handleAdd = () => {
-  countStore.dispatch({ type: "ADD" }); //action은 object여야만 하며 type이 있어야 한다
+  countStore.dispatch({ type: ADD }); //action은 object여야만 하며 type이 있어야 한다
 };
 add.addEventListener("click", handleAdd);
 
-minus.addEventListener("click", () => countStore.dispatch({ type: "MINUS" }));
+minus.addEventListener("click", () => countStore.dispatch({ type: MINUS }));
