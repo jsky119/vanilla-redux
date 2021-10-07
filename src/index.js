@@ -11,7 +11,7 @@ const reducer = (state = [], action) => {
   console.log(action);
   switch (action.type) {
     case ADD_TODO:
-      return [];
+      return [...state, { text: action.text }];
     case DELETE_TODO:
       return [];
     default:
@@ -20,6 +20,9 @@ const reducer = (state = [], action) => {
 };
 
 const store = createStore(reducer);
+
+//ADD_TODO로 return한 state를 확인
+store.subscribe(() => console.log(store.getState()));
 
 const onSubmit = (e) => {
   e.preventDefault();
